@@ -139,7 +139,7 @@ for (int i=0; i<10; i++) {
     cout << endl << endl ;
 }
 
-
+/*
 for (int query_vector_number = 0; query_vector_number<=666;query_vector_number++)
 {
     //int query_vector_number = 666 ;
@@ -147,7 +147,7 @@ for (int query_vector_number = 0; query_vector_number<=666;query_vector_number++
     int k = exhaustive_search(images, test);
     cout << "The nearest neighbor to vector " << query_vector_number << " from file is " ;
     cout << "vector number " << k << endl ;
-}
+}*/
 
 /*
 int x = 5 ;
