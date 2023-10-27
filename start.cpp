@@ -21,7 +21,7 @@ void createv() {
     for (int i=0; i<dimensions; i++) v[i] = distribution(gen)+2;
 }
 
-// diavazei ena specific vector apo to arxeio kai ton epistrefei
+// diavazei ena specific vector apo to arxeio kai ton epistrefei, needs delete[] after call
 int* vector_from_file(const string& filepath, int vector_number) { 
     if (vector_number <= 0) {
         cerr << "Vector numbering error " << endl;
@@ -112,12 +112,13 @@ for (int i=0; i<10; i++) {
     }
     cout << endl << endl ;
 }
-
-/*int x = 5 ;
+/*
+int x = 5 ;
 int* test = vector_from_file("1.dat", x) ;
 cout << "Printing vector " << x << endl ;
 for (int i = 0; i < dimensions; i++) 
     cout << test[i] << " " ;
 cout << endl ;
+delete[] test ;
 return 0;*/
 }
