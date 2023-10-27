@@ -20,9 +20,18 @@ void createv() {
     for (int i=0; i<dimensions; i++) v[i] = distribution(gen)+2;
 }
 
+float Euclidean_distance (int* vector1, int*vector2){
+    int sum = 0 ;
+    for (int i=0; i<dimensions; i++)
+        sum = sum + pow( vector1[i] - vector2[i],2 ) ;
+    float distance = sqrt(sum) ;
+    return distance ;
+}
+
+
 // diavazei ena specific vector apo to arxeio kai ton epistrefei, needs delete[] after call
 int* vector_from_file(const string& filepath, int vector_number, int offset) { 
-    if (vector_number <= 0) {
+    if (vector_number < 0) {
         cerr << "Vector numbering error " << endl;
         return nullptr;
     }
@@ -32,7 +41,7 @@ int* vector_from_file(const string& filepath, int vector_number, int offset) {
         cerr << "Error: Cannot open file " << filepath << endl;
         return nullptr;
     }
-    int vectoroffset = offset + (vector_number-1) * dimensions;
+    int vectoroffset = offset + vector_number * dimensions;
     binaryFile.seekg(vectoroffset);
     if (!binaryFile) {
         cerr << "Error: Failed to find data" << endl;
@@ -47,6 +56,24 @@ int* vector_from_file(const string& filepath, int vector_number, int offset) {
 
     binaryFile.close();
     return new_vector;
+}
+
+int exhaustive_search(int images[][dimensions], int* evector) 
+{
+    float min_distance = 100000000.0 ;
+    int vector_number ;
+    float distance ;
+    for (int i=0; i<maximages; i++)
+    {
+        int* currentRow = images[i] ;
+        distance = Euclidean_distance(currentRow, evector) ;
+        if (distance < min_distance)
+            {
+                min_distance = distance ;
+                vector_number = i ;
+            }
+    } 
+    return vector_number ;
 }
 
 
@@ -111,6 +138,15 @@ for (int i=0; i<10; i++) {
     }
     cout << endl << endl ;
 }
+
+/*
+int query_vector_number = 0 ;
+int* test = vector_from_file("1.dat", query_vector_number, 16) ;
+int k = exhaustive_search(images, test);
+cout << "The nearest neighbor to vector " << query_vector_number << " from file is " ;
+cout << "vector number " << k++ << endl ;
+*/
+
 /*
 int x = 5 ;
 int* test = vector_from_file("1.dat", x, 16) ;
