@@ -116,7 +116,7 @@ int main() {
         if (file.read((char*)&byte,1)) {
             if ((int)byte != 0) cout << (int)byte << " ";
             if (i % dimensions == 0) cout << endl << endl ;
-            images[i/dimensions][(i%dimensions)-1] = (int)byte;
+            images[i/dimensions][i%dimensions] = (int)byte;
             byte_index++;
         }
         else cout << "End of file reached." << endl;
@@ -139,7 +139,7 @@ for (int i=0; i<10; i++) {
     cout << endl << endl ;
 }
 
-/*
+
 for (int query_vector_number = 0; query_vector_number<=666;query_vector_number++)
 {
     //int query_vector_number = 666 ;
@@ -148,7 +148,7 @@ for (int query_vector_number = 0; query_vector_number<=666;query_vector_number++
     cout << "The nearest neighbor to vector " << query_vector_number << " from file is " ;
     cout << "vector number " << k << endl ;
 }
-*/
+
 /*
 int x = 5 ;
 int* test = vector_from_file("1.dat", x, 16) ;
