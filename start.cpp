@@ -3,6 +3,7 @@
 #include <random>
 #include <cmath>
 
+const int offset = 16 ;
 const int dimensions = 784;
 const int maximages = 100;
 const int max_capacity = 1000;
@@ -19,6 +20,36 @@ void createv() {
     normal_distribution<float> distribution(0.0, 1.0);
     for (int i=0; i<dimensions; i++) v[i] = distribution(gen)+2;
 }
+
+// diavazei ena specific vector apo to arxeio kai ton epistrefei
+int* vector_from_file(const string& filepath, int vector_number) { 
+    if (vector_number <= 0) {
+        cerr << "Vector numbering error " << endl;
+        return nullptr;
+    }
+    int* new_vector = new int[dimensions];
+    ifstream binaryFile(filepath, ios::binary);
+    if (!binaryFile.is_open()) {
+        cerr << "Error: Cannot open file " << filepath << endl;
+        return nullptr;
+    }
+    int vectoroffset = offset + (vector_number-1) * dimensions;
+    binaryFile.seekg(vectoroffset);
+    if (!binaryFile) {
+        cerr << "Error: Failed to find data" << endl;
+        return nullptr;
+    }
+
+    for (int i = 0; i < dimensions; i++) {
+        unsigned char Value;
+        binaryFile.read((char*)&Value,1) ;
+        new_vector[i] = (int)Value;
+    }
+
+    binaryFile.close();
+    return new_vector;
+}
+
 
 void hashing(int images[][dimensions], int buckets[][max_capacity], int bucket_size[]) {
     float product[maximages] = {0.0};
@@ -82,5 +113,11 @@ for (int i=0; i<10; i++) {
     cout << endl << endl ;
 }
 
-return 0;
+/*int x = 5 ;
+int* test = vector_from_file("1.dat", x) ;
+cout << "Printing vector " << x << endl ;
+for (int i = 0; i < dimensions; i++) 
+    cout << test[i] << " " ;
+cout << endl ;
+return 0;*/
 }
