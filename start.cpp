@@ -3,7 +3,6 @@
 #include <random>
 #include <cmath>
 
-const int offset = 16 ;
 const int dimensions = 784;
 const int maximages = 100;
 const int max_capacity = 1000;
@@ -22,7 +21,7 @@ void createv() {
 }
 
 // diavazei ena specific vector apo to arxeio kai ton epistrefei, needs delete[] after call
-int* vector_from_file(const string& filepath, int vector_number) { 
+int* vector_from_file(const string& filepath, int vector_number, int offset) { 
     if (vector_number <= 0) {
         cerr << "Vector numbering error " << endl;
         return nullptr;
@@ -114,7 +113,7 @@ for (int i=0; i<10; i++) {
 }
 /*
 int x = 5 ;
-int* test = vector_from_file("1.dat", x) ;
+int* test = vector_from_file("1.dat", x, 16) ;
 cout << "Printing vector " << x << endl ;
 for (int i = 0; i < dimensions; i++) 
     cout << test[i] << " " ;
