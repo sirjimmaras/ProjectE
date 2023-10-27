@@ -140,13 +140,15 @@ for (int i=0; i<10; i++) {
 }
 
 /*
-int query_vector_number = 0 ;
-int* test = vector_from_file("1.dat", query_vector_number, 16) ;
-int k = exhaustive_search(images, test);
-cout << "The nearest neighbor to vector " << query_vector_number << " from file is " ;
-cout << "vector number " << k++ << endl ;
+for (int query_vector_number = 0; query_vector_number<=666;query_vector_number++)
+{
+    //int query_vector_number = 666 ;
+    int* test = vector_from_file("1.dat", query_vector_number, 16) ;
+    int k = exhaustive_search(images, test);
+    cout << "The nearest neighbor to vector " << query_vector_number << " from file is " ;
+    cout << "vector number " << k << endl ;
+}
 */
-
 /*
 int x = 5 ;
 int* test = vector_from_file("1.dat", x, 16) ;
